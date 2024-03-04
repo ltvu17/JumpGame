@@ -31,23 +31,23 @@ public class DialogueTrigger : MonoBehaviour
         {
             visualCue.SetActive(true);
             rb.velocity = Vector3.zero;
-            if (DialogueManager.GetInstance().trueAnswer == true)
-            {
-                trigger.SetActive(false);
-            }
-            else
-            {
-                trigger.SetActive(true);
-            }
             // Pass a callback function to EnterDialogueMode
             DialogueManager.GetInstance().EnterDialogueMode(inkJSON, OnDialogueFinished);
+            trigger.SetActive(false);
 
+            /*            if (DialogueManager.GetInstance().trueAnswer == true)
+                        {
+                            trigger.SetActive(false);
+                        }
+                        else
+                        {
+                            trigger.SetActive(true);
+                        }*/
         }
-        else
+/*        else
         {
-
             visualCue.SetActive(false);
-        }
+        }*/
     }
 
     // Callback function to be called when dialogue is finished
@@ -59,7 +59,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "GhostCharacter")
+        if(collision.gameObject.tag == "Player")
         {
             playerInrange=true;
         }
@@ -67,7 +67,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "GhostCharacter")
+        if(collision.gameObject.tag == "Player")
         {
             playerInrange=false;
         }
