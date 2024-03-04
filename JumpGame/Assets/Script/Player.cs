@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
         {
             if (Timer*jumpForce <= maxForce) 
             {
-                Timer += Time.deltaTime;
+                Timer += Time.deltaTime + Time.deltaTime/2;
             }
             else
             {
@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
         {
             rb.velocity = new Vector2(movementDirection * movementForce, Timer * jumpForce * 1.75f);
             isHolding = false;
-            Timer = 1;
+            Timer = 1f;
         }
     } 
 
