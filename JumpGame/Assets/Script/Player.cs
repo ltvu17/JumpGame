@@ -28,12 +28,22 @@ public class Player : MonoBehaviour
     private bool isWalking;
     private bool isJumping = false;
     private Rigidbody2D rb;
+    //t
+    private static Player instance;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
     private void Update()
-    {       
+    {
+
+        if (DialogueManager.GetInstance().dialogueIsPlaying)
+
+        {
+            movementDirection = 0;
+            return;
+        }
         movementDirection = Input.GetAxisRaw("Horizontal");
         canGround = Physics2D.OverlapCircle(groundDetect.position, groundRadius , groundLayerMask);
         if (rb.velocity.y > 0)
@@ -104,6 +114,9 @@ public class Player : MonoBehaviour
 
     public void FixedUpdate()
     {
+        //t
+
+
         if (canGround) return;
 
         if (rb.velocity.y < 0)
@@ -135,4 +148,5 @@ public class Player : MonoBehaviour
     {
         return isHolding;
     }
+
 }
